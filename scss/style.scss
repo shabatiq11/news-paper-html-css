@@ -12,9 +12,11 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scrollbar-width: none;
 }
 // variables for breakpoints
 $breakpoint-xs: 326px;
+$breakpoint-xxs: 440px;
 $breakpoint-sm: 576px;
 $breakpoint-600: 600px;
 $breakpoint-ssm: 660px;
@@ -46,12 +48,13 @@ img {
     object-fit: cover;
     object-position: center;
     background-size: cover;
+    transition: all .5s;
+    overflow: hidden;
+    &:hover { transform: scale(1.1) }
 } 
 // reusable Media Query
 @mixin mediaQuery($breakpoint: 0) {
-    @media (min-width: $breakpoint) {
-        @content;
-    }
+    @media (min-width: $breakpoint) { @content; }
 }
 
 // to all sections 
@@ -94,12 +97,8 @@ section {
             &:not(:first-child) {
                 padding-left: 0.8rem;
                 border-left: 0.5px solid rgba($color: #000000, $alpha: .2);
-
             }
-            &:hover {
-                text-decoration: underline;
-
-            }
+            &:hover { text-decoration: underline; }
         }
     }
 }
@@ -107,56 +106,50 @@ section {
 .main-article-section {
     padding-top: 0.5rem;
     height: 65rem;
-    @include mediaQuery($breakpoint-xl) {
-        height: 72rem;
-    }
+    @include mediaQuery($breakpoint-xl) { height: 72rem }
     > div {
-        display: grid;
-        grid-template-columns: 2.35fr 1fr;
-        height: 25rem;
+        @include mediaQuery($breakpoint-md) {
+            display: grid;
+            grid-template-columns: 2.35fr 1fr;
+            height: 25rem;
+        }
         .grid-left {
             padding-right: 3rem;
             border-right: .5px solid rgba($color: #000000, $alpha: .13);
             object-fit: cover;
             cursor: pointer;
             .image-container {
-                height: 47rem;
+                height: 17rem;
+                width: 85vw;
+                margin: 0 auto 1rem auto;
                 object-fit: cover;
-                @include mediaQuery($breakpoint-md) {
-                    //width: 47.5rem;
-                    height: 31.8rem;
-                }
-                @include mediaQuery($breakpoint-lg) {
-                    //width: 47.5rem;
-                    height: 40.5rem;
-                }
-                @include mediaQuery($breakpoint-llg) {
-                    //width: 47.5rem;
-                    height: 43.8rem;
-                }
-                @include mediaQuery($breakpoint-xl) {
-                    height: 54rem;
-                }
+                overflow: hidden;
+                @include mediaQuery($breakpoint-xs) { height: 22rem; }
+                @include mediaQuery($breakpoint-xxs) { height: 30rem; }
+                @include mediaQuery($breakpoint-sm) { height: 45.8rem; width: unset; }
+                @include mediaQuery($breakpoint-md) { height: 31.8rem }
+                @include mediaQuery($breakpoint-lg) { height: 40.5rem }
+                @include mediaQuery($breakpoint-llg) { height: 43.8rem }
+                @include mediaQuery($breakpoint-xl) { height: 54rem }
             }
-            .news-image {
-                width: 100%;  
-            }
+            // 
             .news-details {
-                max-width: 80%;
-                margin: 0 auto;
+                max-width: 90%;
+                margin-right: auto;
+                @include mediaQuery($breakpoint-md) { 
+                    width: 80%;
+                    margin: 0 auto;
+                }
                 .news-heading {
-                    text-align: center;
+                    @include mediaQuery($breakpoint-md) { text-align: center; }
                     font-size: 2.2rem;
-                    &:hover {
-                        text-decoration: underline;
-                    }
                 }
                 .news-description {
-                    text-align: center;
+                    @include mediaQuery($breakpoint-md) { text-align: center; }
                     font-size: 1.4rem;
                 }
                 .post-author {
-                    text-align: center;
+                    @include mediaQuery($breakpoint-md) { text-align: center; }
                     color: #727272;
                     font-size: 1.1rem;
                     font-weight: 500;
@@ -164,6 +157,10 @@ section {
                     margin: .7rem 0;
                 } 
             }
+            &:hover {
+                .news-heading { text-decoration: underline; }
+                > .news > .image-container > img { transform: scale(1.1); }
+            } 
         }
         .grid-right {
             margin-left: 3rem;
@@ -173,17 +170,11 @@ section {
             list-style-type: none;
             > li {
                 padding: 0;
-                @include mediaQuery($breakpoint-mmd) {
-                    padding: 2.5rem 0 2rem 0;
-                }
-                &:first-child {
-                    padding-top: 0;
-                }
-                &:last-child{
-                    padding-bottom: 0;
-                }
+                @include mediaQuery($breakpoint-mmd) { padding: 2.5rem 0 2rem 0; }
+                &:first-child { padding-top: 0; }
+                &:last-child{ padding-bottom: 0; }
 
-                .small-news {
+                .side-news {
                     &__sec {
                         display: flex;
                         align-items: center;
@@ -193,14 +184,10 @@ section {
                         width: 7.5rem;
                         height: 7.5rem;
                         object-fit: cover;
-                        > img {
-                            height: 7.5rem;
-                            width: 7.5rem;
-                            object-fit: cover;
-                            object-position: center;
-                        }
+                        overflow: hidden;
                     }
                     &__heading {
+                        width: 70%;
                         font-size: 2rem;
                         line-height: 2.5rem;
                         font-weight: 700;
@@ -214,18 +201,17 @@ section {
                         }
                     }
                     .post-author {
-                        //text-align: center;
                         color: #727272;
                         font-size: 1.1rem;
                         font-weight: 500;
                         line-height: 1rem;
                         margin: .5rem 0 1rem 0;
-                        @include mediaQuery($breakpoint-mmd) {
-                            margin-top: 2rem;
-                        }
-                        @include mediaQuery($breakpoint-xl) {
-                            margin-top: .7rem;
-                        }
+                        @include mediaQuery($breakpoint-mmd) { margin-top: 2rem; }
+                        @include mediaQuery($breakpoint-xl) { margin-top: .7rem; }
+                    }
+                    &:hover{
+                        .side-news__heading { text-decoration: underline; }
+                        .side-news__image > img { transform: scale(1.1); }
                     }
                 }
             }
@@ -266,9 +252,7 @@ section {
                     color: #000000;
                     fill: #000000;
                     border-bottom: 1px solid rgba($color: #000000, $alpha: 1.0);
-                    .btn__svg{
-                        fill: #000000;
-                    }
+                    .btn__svg{ fill: #000000; }
                 }  
                 &__svg {
                     width: 1.5rem;
@@ -294,37 +278,24 @@ section {
                 list-style-type: none;
                 // 
                 > li {
-                    
                     // 
                     &:not(:first-child) {
-                        @include mediaQuery($breakpoint-sm) {
-                            margin-top: 1rem;
-                        }
-                        @include mediaQuery($breakpoint-md) {
-                            margin-top: 2rem;
-                        }
+                        margin-top: 1rem; 
+                        @include mediaQuery($breakpoint-md) { margin-top: 2rem; }
                     }
                     // 
                     &:not(:last-child) {
                         border-bottom: 1px solid #ccc;
-                        @include mediaQuery($breakpoint-sm) {
-                            padding-bottom: 1.5rem;
-                        }
-                        @include mediaQuery($breakpoint-md) {
-                            padding-bottom: 2rem;
-                        }
+                        padding-bottom: 1.5rem; 
+                        @include mediaQuery($breakpoint-md) { padding-bottom: 2rem; }
                     }
                     // 
                     .small-news {
                         cursor: pointer;
                         display: grid;
                         grid-template-columns: 3fr 1fr;
-                        @include mediaQuery($breakpoint-sm) {
-                            grid-template-columns: 1fr 3fr 0.7fr;
-                        }
-                        @include mediaQuery($breakpoint-md) {
-                            grid-template-columns: 1fr 2fr 1fr;
-                        }
+                        @include mediaQuery($breakpoint-sm) { grid-template-columns: 1fr 3fr 0.7fr; }
+                        @include mediaQuery($breakpoint-md) { grid-template-columns: 1fr 2fr 1fr; }
                         gap: 2rem;
                         // 
                         &__post-author {
@@ -349,16 +320,26 @@ section {
                         &__details {
                             order: 1;
                             > p {
-                                @include mediaQuery($breakpoint-sm) {
-                                    font-size: 1.2rem;
-                                }
-                                @include mediaQuery($breakpoint-md) {
-                                    font-size: 1.6rem;
-                                }
+                                font-size: 1.3rem; 
+                                @include mediaQuery($breakpoint-md) { font-size: 1.6rem; }
+                            }
+                            > .date-and-time {
+                                display: block;
+                                color: #727272;
+                                font-size: 1.1rem;
+                                font-weight: 400;
+                                line-height: 1rem;
+                                margin: 1rem 0;
+                                @include mediaQuery($breakpoint-sm) { display: none; }
                             }
                         }
 
                         &__heading {
+                            font-size: 1.7rem;
+                            line-height: 2rem;
+                            max-width: 47rem;
+                            font-weight: 400;
+                            margin-bottom: .8rem;
                             @include mediaQuery($breakpoint-sm) {
                                 font-size: 2rem;
                                 font-weight: 500;
@@ -370,7 +351,6 @@ section {
                                 font-weight: 500;
                                 line-height: 3.3rem;
                                 margin-bottom: 2rem;
-                               
                             }
                         }
 
@@ -378,6 +358,7 @@ section {
                             object-fit: cover;
                             height: 10rem;
                             width: 15rem;
+                            overflow: hidden;
                             @include mediaQuery($breakpoint-ssm) {
                                 height: 14rem;
                                 width: 20.5rem;
@@ -385,19 +366,17 @@ section {
                             order: 2;
                         }
                         &:hover {
-                            .small-news__heading{
-                                text-decoration: underline;
-                            }
+                            .small-news__heading{ text-decoration: underline; }
+                            .small-news__image > img { transform: scale(1.1); }
                         }
-
                     }
                 }
             }
             // container for ads
             &__second-col {
-                background-color: #ccc;
                 display: none;
                 @include mediaQuery($breakpoint-llg) {
+                    background-color: #fff;
                     display: block;
                 }
             }
