@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+    font-family: Inter, system-ui, "Fira Sans", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    color: black;
+    background-color: white;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+// variables for breakpoints
+$breakpoint-xs: 326px;
+$breakpoint-sm: 576px;
+$breakpoint-600: 600px;
+$breakpoint-ssm: 660px;
+$breakpoint-md: 768px;
+$breakpoint-mmd: 860px;
+$breakpoint-lg: 960px;
+$breakpoint-llg: 1050px;
+$breakpoint-xl: 1100px;
+$breakpoint-xxl: 1200px;
+// global font size 
+html {
+    font-size: 62.5%;
+}
+// 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+// to all anchor tags
+a {
+    text-decoration: none;
+    color: black;
+}
+// to all images
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background-size: cover;
+} 
+// reusable Media Query
+@mixin mediaQuery($breakpoint: 0) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+// to all sections 
+section {
+    border-bottom: 0.5px solid rgba($color: #000000, $alpha: .1);
+    margin: 2rem 2.5rem 0 2.5rem;
+    @include mediaQuery($breakpoint-xxl) {
+        max-width: 120rem;
+        margin: 2rem auto 0 auto;
+    }
+}
+
+// header section
+.header-section {
+    > h1 {
+        font-size: 4.4rem;
+        line-height: 4.4rem;
+        font-weight: bolder;
+        margin-bottom: 1rem;
+    }
+    .span-border {
+        height: 1px;
+        width: 100%;
+        background-color: rgba($color: #000000, $alpha: .4);
+    }
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        list-style-type: none;
+        padding: 0.8rem 0;
+        border-top: 0.5px solid rgba($color: #000000, $alpha: .2);
+        border-bottom: 2px solid rgba($color: #000000, $alpha: .8);
+        li {
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            line-height: 1.1rem;
+            cursor: pointer;
+            padding-right: 0.8rem;
+            &:not(:first-child) {
+                padding-left: 0.8rem;
+                border-left: 0.5px solid rgba($color: #000000, $alpha: .2);
+
+            }
+            &:hover {
+                text-decoration: underline;
+
+            }
+        }
+    }
+}
+// main article section
+.main-article-section {
+    padding-top: 0.5rem;
+    height: 65rem;
+    @include mediaQuery($breakpoint-xl) {
+        height: 72rem;
+    }
+    > div {
+        display: grid;
+        grid-template-columns: 2.35fr 1fr;
+        height: 25rem;
+        .grid-left {
+            padding-right: 3rem;
+            border-right: .5px solid rgba($color: #000000, $alpha: .13);
+            object-fit: cover;
+            cursor: pointer;
+            .image-container {
+                height: 47rem;
+                object-fit: cover;
+                @include mediaQuery($breakpoint-md) {
+                    //width: 47.5rem;
+                    height: 31.8rem;
+                }
+                @include mediaQuery($breakpoint-lg) {
+                    //width: 47.5rem;
+                    height: 40.5rem;
+                }
+                @include mediaQuery($breakpoint-llg) {
+                    //width: 47.5rem;
+                    height: 43.8rem;
+                }
+                @include mediaQuery($breakpoint-xl) {
+                    height: 54rem;
+                }
+            }
+            .news-image {
+                width: 100%;  
+            }
+            .news-details {
+                max-width: 80%;
+                margin: 0 auto;
+                .news-heading {
+                    text-align: center;
+                    font-size: 2.2rem;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                .news-description {
+                    text-align: center;
+                    font-size: 1.4rem;
+                }
+                .post-author {
+                    text-align: center;
+                    color: #727272;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    line-height: 1rem;
+                    margin: .7rem 0;
+                } 
+            }
+        }
+        .grid-right {
+            margin-left: 3rem;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            list-style-type: none;
+            > li {
+                padding: 0;
+                @include mediaQuery($breakpoint-mmd) {
+                    padding: 2.5rem 0 2rem 0;
+                }
+                &:first-child {
+                    padding-top: 0;
+                }
+                &:last-child{
+                    padding-bottom: 0;
+                }
+
+                .small-news {
+                    &__sec {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                    &__image {
+                        width: 7.5rem;
+                        height: 7.5rem;
+                        object-fit: cover;
+                        > img {
+                            height: 7.5rem;
+                            width: 7.5rem;
+                            object-fit: cover;
+                            object-position: center;
+                        }
+                    }
+                    &__heading {
+                        font-size: 2rem;
+                        line-height: 2.5rem;
+                        font-weight: 700;
+                    }
+                    &__details {
+                        display: none;
+                        @include mediaQuery($breakpoint-xl) {
+                            display: block;
+                            font-size: 1.4rem;
+                            margin: 2rem 0 0 0;
+                        }
+                    }
+                    .post-author {
+                        //text-align: center;
+                        color: #727272;
+                        font-size: 1.1rem;
+                        font-weight: 500;
+                        line-height: 1rem;
+                        margin: .5rem 0 1rem 0;
+                        @include mediaQuery($breakpoint-mmd) {
+                            margin-top: 2rem;
+                        }
+                        @include mediaQuery($breakpoint-xl) {
+                            margin-top: .7rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// 
+// latest and search section styling
+// 
+.latest-and-search-section {
+    margin-top: 4rem;
+    height: 100rem;
+    border-top: 2px solid rgba($color: #000000, $alpha: 1.0);
+    > ul {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba($color: #000000, $alpha: .3);
+        > li {
+            cursor: pointer;
+            .btn {
+                @include mediaQuery($breakpoint-ssm) {
+                    font-size: 1.8rem;
+                    width: 14rem;
+                    padding: 1rem;
+                }
+                font-size: 1.4rem;
+                font-weight: 400;
+                color: rgba($color: #000000, $alpha: .7);
+                display: inline-block;
+                text-align: center;
+                width: 10rem;
+                padding: 0.5rem 1rem;
+                border-bottom: 1px solid #fff; 
+                &:hover,
+                &:active {
+                    font-weight:500;
+                    color: #000000;
+                    fill: #000000;
+                    border-bottom: 1px solid rgba($color: #000000, $alpha: 1.0);
+                    .btn__svg{
+                        fill: #000000;
+                    }
+                }  
+                &__svg {
+                    width: 1.5rem;
+                    fill: #ccc;
+                }
+            }
+        }
+    }
+    > .latest-news-col {
+        padding-top: 3rem;
+        // 
+        .grid {
+            display: grid;
+            grid-template-columns: 100% 0;
+            gap: 4rem;
+            // 
+            @include mediaQuery($breakpoint-llg) {
+                grid-template-columns: 75% 20%;
+                gap: 6rem;
+            }
+            // 
+            &__first-col {
+                list-style-type: none;
+                // 
+                > li {
+                    
+                    // 
+                    &:not(:first-child) {
+                        @include mediaQuery($breakpoint-sm) {
+                            margin-top: 1rem;
+                        }
+                        @include mediaQuery($breakpoint-md) {
+                            margin-top: 2rem;
+                        }
+                    }
+                    // 
+                    &:not(:last-child) {
+                        border-bottom: 1px solid #ccc;
+                        @include mediaQuery($breakpoint-sm) {
+                            padding-bottom: 1.5rem;
+                        }
+                        @include mediaQuery($breakpoint-md) {
+                            padding-bottom: 2rem;
+                        }
+                    }
+                    // 
+                    .small-news {
+                        cursor: pointer;
+                        display: grid;
+                        grid-template-columns: 3fr 1fr;
+                        @include mediaQuery($breakpoint-sm) {
+                            grid-template-columns: 1fr 3fr 0.7fr;
+                        }
+                        @include mediaQuery($breakpoint-md) {
+                            grid-template-columns: 1fr 2fr 1fr;
+                        }
+                        gap: 2rem;
+                        // 
+                        &__post-author {
+                            display: none;
+                            order: unset;
+                            @include mediaQuery($breakpoint-sm) {      
+                                display: block;                          
+                                order: 0;
+                                margin-top: 2rem;
+                                color: #727272;
+                                font-size: 1.1rem;
+                                font-weight: 400;
+                                line-height: 1rem;
+                                text-align: center;
+                                > span {
+                                    display: block;
+                                    margin: 1rem 0;
+                                }
+                            }
+                        }
+                        // 
+                        &__details {
+                            order: 1;
+                            > p {
+                                @include mediaQuery($breakpoint-sm) {
+                                    font-size: 1.2rem;
+                                }
+                                @include mediaQuery($breakpoint-md) {
+                                    font-size: 1.6rem;
+                                }
+                            }
+                        }
+
+                        &__heading {
+                            @include mediaQuery($breakpoint-sm) {
+                                font-size: 2rem;
+                                font-weight: 500;
+                                line-height: 2.5rem;
+                                margin-bottom: 1.5rem;
+                            }
+                            @include mediaQuery($breakpoint-md) {
+                                font-size: 2.4rem;
+                                font-weight: 500;
+                                line-height: 3.3rem;
+                                margin-bottom: 2rem;
+                               
+                            }
+                        }
+
+                        &__image {
+                            object-fit: cover;
+                            height: 10rem;
+                            width: 15rem;
+                            @include mediaQuery($breakpoint-ssm) {
+                                height: 14rem;
+                                width: 20.5rem;
+                            }
+                            order: 2;
+                        }
+                        &:hover {
+                            .small-news__heading{
+                                text-decoration: underline;
+                            }
+                        }
+
+                    }
+                }
+            }
+            // container for ads
+            &__second-col {
+                background-color: #ccc;
+                display: none;
+                @include mediaQuery($breakpoint-llg) {
+                    display: block;
+                }
+            }
+        }
+    }
+}   

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>second html page</title>
+    <style>
+        .grid-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+           
+            gap: 0;
+        }
+        .grid-item {
+            height: 100px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .grid-item-1 { background-color: aqua; order: 1; }
+        .grid-item-2 { background-color:antiquewhite; order: 2; }
+        .grid-item-3 { background-color:cadetblue; }
+        .grid-item-4 { background-color:azure; }
+        .grid-item-5 { background-color:burlywood; order: 0; }
+        
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item grid-item-1">grid-item-1</div>
+        <div class="grid-item grid-item-2">grid-item-2</div>
+        <div class="grid-item grid-item-3">grid-item-3</div>
+        <div class="grid-item grid-item-4">grid-item-4</div>
+        <div class="grid-item grid-item-5">grid-item-5</div>
+       
+    </div>
+</body>
+</html>
